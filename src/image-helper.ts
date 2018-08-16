@@ -10,12 +10,17 @@ export class ImageHelper {
         const createdAt = params.createdAt || new Date().toISOString();
         const expiresAt = ImageHelper.expiresAt(new Date(createdAt));
 
+        let host = params.host.trim().toLowerCase();
+        if (/^(www\d?|m|mobi)\./.test(host)) {
+            host = host.substr(host.indexOf('.') + 1);
+        }
+
         const image: Image = {
             id,
             hash: params.hash,
             height: params.height,
             width: params.width,
-            hosts: [params.host.trim()],
+            hosts: [host],
             length: params.length,
             format: params.format,
             createdAt,
