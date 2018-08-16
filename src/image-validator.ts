@@ -1,0 +1,54 @@
+import { EntityValidator, Joi } from "@ournet/domain";
+import { Image } from "./image";
+
+export class ImageValidator extends EntityValidator<Image> {
+    constructor() {
+        super({ createSchema, updateSchema });
+    }
+}
+
+const schema = {
+    id: Joi.string().regex(/^[a-z0-9]{16,32}-[0-9]{3}[jp]$/),
+
+    hash: Joi.string().regex(/^[a-z0-9]{16,32}$/),
+    hosts: Joi.array().items(Joi.string().trim().min(4).max(100)).min(1).max(100),
+
+    width: Joi.number().integer().min(200).max(10000),
+    height: Joi.number().integer().min(200).max(10000),
+    length: Joi.number().integer().min(200),
+    format: Joi.string().valid(['jpg', 'png']),
+
+    updatedAt: Joi.string().isoDate(),
+    createdAt: Joi.string().isoDate(),
+    expiresAt: Joi.date().timestamp().raw(),
+};
+
+const createSchema = Joi.object().keys({
+    id: schema.id.required(),
+
+    hash: schema.hash.required(),
+    hosts: schema.hosts.required(),
+
+    width: schema.width.required(),
+    height: schema.height.required(),
+    length: schema.length.required(),
+    format: schema.format.required(),
+
+    updatedAt: schema.updatedAt,
+    createdAt: schema.createdAt.required(),
+    expiresAt: schema.expiresAt.required(),
+}).required();
+
+const updateSchema = Joi.object().keys({
+    id: schema.id.required(),
+    set: Joi.object().keys({
+        hosts: schema.hosts,
+
+        width: schema.width,
+        height: schema.height,
+        length: schema.length,
+
+        updatedAt: schema.updatedAt,
+        expiresAt: schema.expiresAt,
+    }).required(),
+}).required();
