@@ -18,3 +18,7 @@ export {
 export {
     ImageValidator,
 } from './image-validator';
+
+export {
+    SaveImageUseCase,
+} from './save-image-usecase';
