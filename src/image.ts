@@ -11,6 +11,7 @@ export interface Image {
     height: number
     length: number
     format: ImageFormat
+    color: string
 
     createdAt: string
     updatedAt?: string
@@ -30,6 +31,7 @@ export interface BuildImageParams {
     height: number
     length: number
     format: ImageFormat
+    color: string
 
     createdAt?: string
     expiresAt?: number

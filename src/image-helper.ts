@@ -5,7 +5,7 @@ export class ImageHelper {
 
     static build(params: BuildImageParams): Image {
 
-        const id = ImageHelper.createId(params.hash, params.format, params);
+        const id = ImageHelper.createId(params.hash, params.color, params.format, params);
 
         const createdAt = params.createdAt || new Date().toISOString();
         const expiresAt = ImageHelper.expiresAt(new Date(createdAt));
@@ -23,6 +23,7 @@ export class ImageHelper {
             hosts: [host],
             length: params.length,
             format: params.format,
+            color: params.color.trim().toLowerCase(),
             createdAt,
             expiresAt,
         };
@@ -30,10 +31,10 @@ export class ImageHelper {
         return image;
     }
 
-    static createId(hash: string, format: ImageFormat, size: ImageSize) {
+    static createId(hash: string, color: string, format: ImageFormat, size: ImageSize) {
         const r = formatImageIdRatio(size);
         const idFormat = formatImageIdFormat(format);
-        return `${hash.trim().toLowerCase()}-${r}${idFormat.trim()}`;
+        return `${hash.trim()}-${color.trim().toLowerCase()}-${r}${idFormat.trim()}`;
     }
 
     static parseImageIdFormat(id: string) {
