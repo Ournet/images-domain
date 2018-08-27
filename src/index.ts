@@ -17,6 +17,8 @@ export {
 
 export {
     ImageValidator,
+    IMAGE_MIN_HEIGHT,
+    IMAGE_MIN_WIDTH,
 } from './image-validator';
 
 export {
