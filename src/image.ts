@@ -1,6 +1,16 @@
 export type ImageFormat = 'jpg' | 'png';
 export type ImageOrientation = 'PORTRAIT' | 'LANGSCAPE';
 
+export function getImageContentType(format: ImageFormat) {
+    switch (format) {
+        case 'jpg':
+            return 'image/jpeg';
+        case 'png':
+            return 'image/png';
+    }
+    throw new Error(`Invalid image format: ${format}`);
+}
+
 export interface Image {
     id: string
 
@@ -36,3 +46,5 @@ export interface BuildImageParams {
     createdAt?: string
     expiresAt?: number
 }
+
+

@@ -5,6 +5,7 @@ export {
     ImageFormat,
     ImageOrientation,
     ImageSize,
+    getImageContentType,
 } from './image';
 
 export {
@@ -24,3 +25,10 @@ export {
 export {
     SaveImageUseCase,
 } from './save-image-usecase';
+
+export {
+    ImageSizeName,
+    getImageMasterSizeName,
+    getImageSizeByName,
+    getImageSizeNames,
+} from './image-sizes';

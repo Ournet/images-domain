@@ -21,6 +21,8 @@ const schema = {
     length: Joi.number().integer().min(200),
     format: Joi.string().valid(['jpg', 'png']),
 
+    color: Joi.string().lowercase().hex().length(6),
+
     updatedAt: Joi.string().isoDate(),
     createdAt: Joi.string().isoDate(),
     expiresAt: Joi.date().timestamp().raw(),
@@ -36,6 +38,8 @@ const createSchema = Joi.object().keys({
     height: schema.height.required(),
     length: schema.length.required(),
     format: schema.format.required(),
+
+    color: schema.color.required(),
 
     updatedAt: schema.updatedAt,
     createdAt: schema.createdAt.required(),
