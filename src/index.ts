@@ -5,8 +5,11 @@ export {
     ImageFormat,
     ImageOrientation,
     ImageSize,
-    getImageContentType,
 } from './image';
+
+export {
+    ImageFormatHelper,
+} from './image-format-helper';
 
 export {
     ImageHelper,

@@ -1,5 +1,5 @@
 import { EntityValidator, Joi } from "@ournet/domain";
-import { Image } from "./image";
+import { Image, IMAGE_FORMAT_INFO } from "./image";
 
 export const IMAGE_MIN_WIDTH = 450;
 export const IMAGE_MIN_HEIGHT = 450;
@@ -19,7 +19,7 @@ const schema = {
     width: Joi.number().integer().min(IMAGE_MIN_WIDTH).max(10000),
     height: Joi.number().integer().min(IMAGE_MIN_HEIGHT).max(10000),
     length: Joi.number().integer().min(200),
-    format: Joi.string().valid(['jpg', 'png']),
+    format: Joi.string().valid(IMAGE_FORMAT_INFO.map(item => item.format)),
 
     color: Joi.string().lowercase().hex().length(6),
 

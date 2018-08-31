@@ -1,15 +1,7 @@
-export type ImageFormat = 'jpg' | 'png';
-export type ImageOrientation = 'PORTRAIT' | 'LANGSCAPE';
+import { Dictionary } from "@ournet/domain";
 
-export function getImageContentType(format: ImageFormat) {
-    switch (format) {
-        case 'jpg':
-            return 'image/jpeg';
-        case 'png':
-            return 'image/png';
-    }
-    throw new Error(`Invalid image format: ${format}`);
-}
+export type ImageFormat = 'jpg' | 'png' | 'webp';
+export type ImageOrientation = 'PORTRAIT' | 'LANGSCAPE';
 
 export interface Image {
     id: string
@@ -47,4 +39,39 @@ export interface BuildImageParams {
     expiresAt?: number
 }
 
+export type ImageFormatInfo = {
+    id: 'j' | 'p' | 'w',
+    format: ImageFormat
+    mimes: string[]
+    extenstions: string[]
+}
 
+export const IMAGE_FORMAT_INFO: ImageFormatInfo[] = [
+    { id: 'j', format: 'jpg', mimes: ['image/jpeg'], extenstions: ['jpeg', 'jpg'] },
+    { id: 'p', format: 'png', mimes: ['image/png'], extenstions: ['png'] },
+    { id: 'w', format: 'webp', mimes: ['image/webp'], extenstions: ['webp'] },
+];
+
+export const IMAGE_FORMAT_INFO_BY_ID: Dictionary<ImageFormatInfo>
+    = IMAGE_FORMAT_INFO.reduce<Dictionary<ImageFormatInfo>>((dic, info) => {
+        dic[info.id] = info;
+        return dic;
+    }, {});
+
+export const IMAGE_FORMAT_INFO_BY_FORMAT: Dictionary<ImageFormatInfo>
+    = IMAGE_FORMAT_INFO.reduce<Dictionary<ImageFormatInfo>>((dic, info) => {
+        dic[info.format] = info;
+        return dic;
+    }, {});
+
+export const IMAGE_FORMAT_INFO_BY_MIME: Dictionary<ImageFormatInfo>
+    = IMAGE_FORMAT_INFO.reduce<Dictionary<ImageFormatInfo>>((dic, info) => {
+        info.mimes.forEach(item => dic[item] = info);
+        return dic;
+    }, {});
+
+export const IMAGE_FORMAT_INFO_BY_EXTENSION: Dictionary<ImageFormatInfo>
+    = IMAGE_FORMAT_INFO.reduce<Dictionary<ImageFormatInfo>>((dic, info) => {
+        info.extenstions.forEach(item => dic[item] = info);
+        return dic;
+    }, {});

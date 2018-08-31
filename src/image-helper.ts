@@ -1,5 +1,6 @@
 import { BuildImageParams, Image, ImageFormat, ImageSize, ImageOrientation } from "./image";
 import { IMAGE_EXPIRE_DAYS } from "./config";
+import { ImageFormatHelper } from "./image-format-helper";
 
 export class ImageHelper {
 
@@ -33,12 +34,12 @@ export class ImageHelper {
 
     static createId(hash: string, color: string, format: ImageFormat, size: ImageSize) {
         const r = formatImageIdRatio(size);
-        const idFormat = formatImageIdFormat(format);
+        const idFormat = ImageFormatHelper.getIdByFormat(format);
         return `${hash.trim()}-${color.trim().toLowerCase()}-${r}${idFormat.trim()}`;
     }
 
     static parseImageIdFormat(id: string) {
-        return parseImageIdFormat(id);
+        return ImageFormatHelper.getFormatByExtension(id.substr(id.length - 1));
     }
     static parseImageIdRatio(id: string) {
         return parseImageIdRatio(id);
@@ -59,23 +60,6 @@ export class ImageHelper {
 
         return Math.floor(expiresAt.getTime() / 1000);
     }
-}
-
-function formatImageIdFormat(format: ImageFormat) {
-    switch (format) {
-        case 'jpg': return 'j';
-        case 'png': return 'p';
-    }
-    throw new Error(`Invalid image format: ${format}`);
-}
-
-function parseImageIdFormat(id: string): ImageFormat {
-    const format = id.substr(id.length - 1);
-    switch (format) {
-        case 'j': return 'jpg';
-        case 'p': return 'png';
-    }
-    throw new Error(`Invalid image format: ${format}`);
 }
 
 function formatImageIdRatio(size: ImageSize) {
