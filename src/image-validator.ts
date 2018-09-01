@@ -11,9 +11,9 @@ export class ImageValidator extends EntityValidator<Image> {
 }
 
 const schema = {
-    id: Joi.string().regex(/^[a-zA-Z0-9]{16,32}-[a-z0-9]{6}-[0-9]{3}[jp]$/),
+    id: Joi.string().regex(/^[a-zA-Z0-9]{6,32}-[a-z0-9]{6}-[0-9]{3}[jp]$/),
 
-    hash: Joi.string().regex(/^[a-zA-Z0-9]{16,32}$/),
+    hash: Joi.string().regex(/^[a-zA-Z0-9]{6,32}$/),
     hosts: Joi.array().items(Joi.string().trim().min(4).max(100)).min(1).max(100),
 
     width: Joi.number().integer().min(IMAGE_MIN_WIDTH).max(10000),

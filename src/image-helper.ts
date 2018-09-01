@@ -39,7 +39,7 @@ export class ImageHelper {
     }
 
     static parseImageIdFormat(id: string) {
-        return ImageFormatHelper.getFormatByExtension(id.substr(id.length - 1));
+        return ImageFormatHelper.getFormatById(id.substr(id.length - 1));
     }
     static parseImageIdRatio(id: string) {
         return parseImageIdRatio(id);
