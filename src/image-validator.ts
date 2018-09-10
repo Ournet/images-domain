@@ -1,17 +1,19 @@
-import { EntityValidator, Joi } from "@ournet/domain";
+
 import { Image, IMAGE_FORMAT_INFO } from "./image";
+import { JoiEntityValidator } from "@ournet/domain";
+import Joi = require('joi');
 
-export const IMAGE_MIN_WIDTH = 450;
-export const IMAGE_MIN_HEIGHT = 450;
-
-export class ImageValidator extends EntityValidator<Image> {
+export class ImageValidator extends JoiEntityValidator<Image> {
     constructor() {
         super({ createSchema, updateSchema });
     }
 }
 
+export const IMAGE_MIN_WIDTH = 450;
+export const IMAGE_MIN_HEIGHT = 450;
+
 const schema = {
-    id: Joi.string().regex(/^[a-zA-Z0-9]{6,32}-[a-z0-9]{6}-[0-9]{3}[jp]$/),
+    id: Joi.string().regex(/^[a-zA-Z0-9]{6,32}-[a-z0-9]{6}-[0-9]{3}[jpw]$/),
 
     hash: Joi.string().regex(/^[a-zA-Z0-9]{6,32}$/),
     hosts: Joi.array().items(Joi.string().trim().min(4).max(100)).min(1).max(100),
