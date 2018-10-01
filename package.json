@@ -43,7 +43,6 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@ournet/domain": "^0.3.1",
     "joi": "^13.6.0"
   }
 }

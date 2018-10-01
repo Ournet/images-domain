@@ -1,9 +1,6 @@
 import { BuildImageParams, Image, ImageFormat, ImageSize, ImageOrientation } from "./image";
 import { IMAGE_EXPIRE_DAYS } from "./config";
 import { ImageFormatHelper } from "./image-format-helper";
-import { ImageSizeName } from "./image-sizes";
-
-const NEWS_HOST = '//news.ournetcdn.net';
 
 export class ImageHelper {
 
@@ -62,19 +59,6 @@ export class ImageHelper {
         expiresAt.setDate(expiresAt.getDate() + IMAGE_EXPIRE_DAYS);
 
         return Math.floor(expiresAt.getTime() / 1000);
-    }
-
-    static url(id: string, size: ImageSizeName, folder: 'news' | 'events', format?: ImageFormat, host: string = NEWS_HOST) {
-        format = format || ImageFormatHelper.getFormatById(id);
-        return host + '/' + folder + '/' + id.substr(0, 4) + '/' + size + '/' + id + '.' + format;
-    }
-
-    static newsUrl(id: string, size: ImageSizeName, format?: ImageFormat) {
-        return ImageHelper.url(id, size, 'news', format);
-    }
-
-    static eventUrl(id: string, size: ImageSizeName, format?: ImageFormat) {
-        return ImageHelper.url(id, size, 'events', format);
     }
 }
 
