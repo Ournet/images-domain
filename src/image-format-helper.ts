@@ -1,4 +1,10 @@
-import { ImageFormat, IMAGE_FORMAT_INFO_BY_EXTENSION, IMAGE_FORMAT_INFO_BY_FORMAT, IMAGE_FORMAT_INFO_BY_ID, IMAGE_FORMAT_INFO_BY_MIME } from "./image";
+import {
+    ImageFormat,
+    IMAGE_FORMAT_INFO_BY_EXTENSION,
+    IMAGE_FORMAT_INFO_BY_FORMAT,
+    IMAGE_FORMAT_INFO_BY_ID,
+    IMAGE_FORMAT_INFO_BY_MIME,
+} from "./image";
 
 export class ImageFormatHelper {
     static getFormatByExtension(ext: string): ImageFormat {
@@ -36,6 +42,9 @@ export class ImageFormatHelper {
     }
 
     static getFormatById(id: string) {
+        if (id.length > 1) {
+            id = id.substr(id.length - 1, 1);
+        }
         const info = IMAGE_FORMAT_INFO_BY_ID[id];
         if (!info) {
             throw new Error(`Invalid image id: ${id}`);

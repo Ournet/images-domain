@@ -35,3 +35,7 @@ export {
     getImageSizeByName,
     getImageSizeNames,
 } from './image-sizes';
+
+export {
+    ImageStorageHelper,
+} from './image-storage-helper';
