@@ -34,6 +34,7 @@ export interface BuildImageParams {
     length: number
     format: ImageFormat
     color: string
+    lang: string
 
     createdAt?: string
     expiresAt?: number

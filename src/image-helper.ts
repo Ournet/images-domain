@@ -11,10 +11,7 @@ export class ImageHelper {
         const createdAt = params.createdAt || new Date().toISOString();
         const expiresAt = ImageHelper.expiresAt(new Date(createdAt));
 
-        let host = params.host.trim().toLowerCase();
-        if (/^(www\d?|m|mobi)\./.test(host)) {
-            host = host.substr(host.indexOf('.') + 1);
-        }
+        let host = ImageHelper.formatImageHost(params.host, params.lang);
 
         const image: Image = {
             id,
@@ -30,6 +27,14 @@ export class ImageHelper {
         };
 
         return image;
+    }
+
+    static formatImageHost(host: string, lang: string) {
+        host = host.trim().toLowerCase();
+        if (/^(www\d?|m|mobi)\./.test(host)) {
+            host = host.substr(host.indexOf('.') + 1);
+        }
+        return `${host}-${lang.trim().toLowerCase()}`;
     }
 
     static createId(hash: string, color: string, format: ImageFormat, size: ImageSize) {

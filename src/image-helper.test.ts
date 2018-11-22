@@ -12,11 +12,12 @@ test('build', t => {
         format: 'jpg',
         height: 500,
         width: 800,
-        length: 23232
+        length: 23232,
+        lang: 'ro',
     };
 
     const image = ImageHelper.build(data);
 
     t.is(image.id, `${data.hash}-${data.color}-160j`);
-    t.is(image.hosts[0], 'protv.md');
+    t.is(image.hosts[0], 'protv.md-ro');
 })
