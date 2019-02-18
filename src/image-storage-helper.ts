@@ -27,4 +27,9 @@ export class ImageStorageHelper {
     static eventUrl(id: string, size: ImageSizeName, format?: ImageFormat) {
         return ImageStorageHelper.url(id, size, 'events', format);
     }
+
+    static quoteUrl(id: string, format?: ImageFormat, host: string = NEWS_HOST) {
+        format = format || ImageFormatHelper.getFormatById(id);
+        return host + '/quote/' + id + '.' + format;
+    }
 }
